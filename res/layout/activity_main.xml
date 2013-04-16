@@ -10,13 +10,26 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" >
 
-        <ImageView
-            android:id="@+id/imageView1"
+        <FrameLayout
             android:layout_width="316dp"
-            android:layout_height="337dp"
-            android:layout_marginLeft="-5dp"
-            android:layout_marginTop="22dp"
-            android:src="@drawable/letter_1" />
+            android:layout_height="337dp" >
+
+            <CustomObject.DrawView
+                android:id="@+id/imageView1"
+                android:layout_width="316dp"
+                android:layout_height="337dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginTop="22dp" 
+                android:src="@drawable/letter_1"
+                />
+
+<!--             <ImageView -->
+<!--                 android:layout_width="316dp" -->
+<!--                 android:layout_height="337dp" -->
+<!--                 android:layout_marginLeft="-5dp" -->
+<!--                 android:layout_marginTop="22dp" -->
+<!--                 android:src="@drawable/letter_1" /> -->
+        </FrameLayout>
 
         <CustomObject.TracedView
             android:id="@+id/point_1"
@@ -104,6 +117,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="258dp"
             android:layout_marginTop="126dp"
+            android:scaleType="fitXY"
             android:src="@drawable/bee" />
     </RelativeLayout>
 

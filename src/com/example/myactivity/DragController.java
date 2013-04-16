@@ -2,6 +2,7 @@ package com.example.myactivity;
 
 import java.util.ArrayList;
 
+import CustomObject.DrawView;
 import CustomObject.MovingObject;
 import CustomObject.TracedView;
 import android.content.Context;
@@ -15,15 +16,19 @@ public abstract class DragController {
 	ArrayList<TracedView> tracedViewsList;
 	int currentIndex;
 	TracedView nextTracedObject;
+	DrawView drawView;
 
 	public DragController(Context context, View root,
-			MovingObject movingObject, ArrayList<TracedView> tracedViewsList) {
+			MovingObject movingObject, ArrayList<TracedView> tracedViewsList,
+			DrawView drawView) {
 		super();
 		this.context = context;
 		this.root = root;
 		this.movingObject = movingObject;
 		this.tracedViewsList = tracedViewsList;
-		nextTracedObject = tracedViewsList.get(0);
+		this.drawView = drawView;
+		currentIndex = 3;
+		nextTracedObject = tracedViewsList.get(currentIndex);
 	}
 
 	public DragController(Context context) {
@@ -34,16 +39,33 @@ public abstract class DragController {
 	public abstract boolean updateView();
 
 	public boolean checkCollision(int x, int y) {
-		if (nextTracedObject.isInsideBounds(movingObject.getCenterX(),
-				movingObject.getCenterY())) {
-			currentIndex++;
-			if (currentIndex >= tracedViewsList.size()) {
-				Toast.makeText(context, "Finished", Toast.LENGTH_LONG).show();
-				return false;
+		if (nextTracedObject == tracedViewsList.get(currentIndex)) {
+			if (nextTracedObject.isInsideBounds(x, y)) {
+				currentIndex++;
+				Toast.makeText(context, "s " + currentIndex, Toast.LENGTH_LONG)
+						.show();
+				if (currentIndex >= tracedViewsList.size()) {
+					Toast.makeText(context, "Finished", Toast.LENGTH_LONG)
+							.show();
+					return false;
+				}
+				nextTracedObject = tracedViewsList.get(currentIndex);
+
 			}
-			nextTracedObject = tracedViewsList.get(currentIndex);
-			
+			return false;
 		}
 		return false;
+	}
+
+	public void drawStart(float x, float y) {
+		drawView.touch_start(x, y);
+	}
+
+	public void drawMove(float x, float y) {
+		drawView.touch_move(x, y);
+	}
+
+	public void drawEnd() {
+		drawView.touch_up();
 	}
 }

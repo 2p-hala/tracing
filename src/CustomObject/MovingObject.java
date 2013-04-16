@@ -1,5 +1,7 @@
 package CustomObject;
 
+import com.example.myactivity.MainActivity;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -8,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-public class MovingObject extends ImageView implements View.OnTouchListener{
+public class MovingObject extends ImageView implements View.OnTouchListener {
 	int width;
 	int height;
 	int topLeftX;
@@ -17,6 +19,7 @@ public class MovingObject extends ImageView implements View.OnTouchListener{
 	int centerY;
 	private int _xDelta;
 	private int _yDelta;
+
 	public MovingObject(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setOnTouchListener(this);
@@ -47,17 +50,21 @@ public class MovingObject extends ImageView implements View.OnTouchListener{
 	public void setCenterY(int centerY) {
 		this.centerY = centerY + height / 2;
 	}
+
 	public boolean onTouch(View view, MotionEvent event) {
 		final int X = (int) event.getRawX();
 		final int Y = (int) event.getRawY();
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN:
+
 			RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) view
 					.getLayoutParams();
 			_xDelta = X - lParams.leftMargin;
 			_yDelta = Y - lParams.topMargin;
+			MainActivity.dragC.drawStart(centerX, centerY);
 			break;
 		case MotionEvent.ACTION_UP:
+			MainActivity.dragC.drawEnd();
 			break;
 		case MotionEvent.ACTION_POINTER_DOWN:
 			break;
@@ -75,12 +82,15 @@ public class MovingObject extends ImageView implements View.OnTouchListener{
 			layoutParams.rightMargin = -250;
 			layoutParams.bottomMargin = -250;
 			view.setLayoutParams(layoutParams);
-//			if (flowers.get(3).isInsideBounds(bee.getCenterX(), bee.getCenterY())) {
-//				Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-//			}
+			MainActivity.dragC.drawMove(centerX+ width / 4, centerY- height / 3);
+			MainActivity.dragC.checkCollision(centerX, centerY);
+//			 if (flowers.get(3).isInsideBounds(bee.getCenterX(),
+			// bee.getCenterY())) {
+			// Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+			// }
 			break;
 		}
-//		_root.invalidate();
+		// _root.invalidate();
 		return true;
 	}
 }
