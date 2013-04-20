@@ -9,14 +9,19 @@ import android.widget.RelativeLayout.LayoutParams;
 public class TracedView extends ImageView {
 	int width;
 	int height;
-	int topLeftX;
-	int topLeftY;
+	public int topLeftX;
+	public int topLeftY;
 	int topLeftX2;
 	int topLeftY2;
+	// int drawingBoundsW;
+	// int drawingBoundsH;
+	int marginW = 10;
+	int marginH = 20;
+	boolean isNewPart;
 
 	public TracedView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		//setViewAttributes();
+		// setViewAttributes();
 	}
 
 	public void setViewAttributes() {
@@ -35,4 +40,21 @@ public class TracedView extends ImageView {
 		}
 		return false;
 	}
+
+	public boolean isInsideDrawingBounds(int x, int y) {
+		if ((x > topLeftX - marginW && x < topLeftX2 + marginW)
+				&& (y > topLeftY - marginH && y < topLeftY2 + marginH)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isNewPart() {
+		return isNewPart;
+	}
+
+	public void setNewPart(boolean isNewPart) {
+		this.isNewPart = isNewPart;
+	}
+
 }

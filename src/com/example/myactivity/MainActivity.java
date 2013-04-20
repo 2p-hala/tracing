@@ -10,28 +10,35 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity  {
+public class MainActivity extends Activity implements AnimationListener {
 	public static DragController dragC;
 	// TextView _view;
 	ViewGroup _root;
 	MovingObject bee;
-	
+
 	ArrayList<TracedView> flowers = new ArrayList<TracedView>();
 	DrawView drawView;
+	int point_form = 0;
+	int point_to = 0;
+	int tx = 0;
+	int ty = 0;
+	ArrayList<Animation> animationList;
+	int currentAnimation = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		animationList = new ArrayList<Animation>();
 
-		flowers.add((TracedView) findViewById(R.id.point_1));
-		flowers.add((TracedView) findViewById(R.id.point_2));
-		flowers.add((TracedView) findViewById(R.id.point_3));
 		flowers.add((TracedView) findViewById(R.id.s1));
 		flowers.add((TracedView) findViewById(R.id.s2));
 		flowers.add((TracedView) findViewById(R.id.s3));
@@ -39,14 +46,27 @@ public class MainActivity extends Activity  {
 		flowers.add((TracedView) findViewById(R.id.s5));
 		flowers.add((TracedView) findViewById(R.id.s6));
 		flowers.add((TracedView) findViewById(R.id.s7));
+		flowers.add((TracedView) findViewById(R.id.s8));
+		flowers.add((TracedView) findViewById(R.id.s9));
+		flowers.add((TracedView) findViewById(R.id.s10));
+		flowers.add((TracedView) findViewById(R.id.s11));
+		flowers.add((TracedView) findViewById(R.id.s12));
+		TracedView tvv = (TracedView) findViewById(R.id.point_1);
+		tvv.setNewPart(true);
+		flowers.add(tvv);
+		tvv = (TracedView) findViewById(R.id.point_2);
+		tvv.setNewPart(true);
+		tvv = (TracedView) findViewById(R.id.point_3);
+		tvv.setNewPart(true);
+		flowers.add(tvv);
 		for (TracedView v : flowers) {
 			v.setViewAttributes();
 		}
 		bee = (MovingObject) findViewById(R.id.bee);
 		bee.setViewAttributes();
 		drawView = (DrawView) findViewById(R.id.imageView1);
-		dragC=new DragController(this,_root,bee,flowers,drawView) {
-			
+		dragC = new DragController(this, _root, bee, flowers, drawView) {
+
 			@Override
 			public boolean updateView() {
 				// TODO Auto-generated method stub
@@ -54,45 +74,46 @@ public class MainActivity extends Activity  {
 			}
 		};
 
+		for (TracedView v : flowers) {
+			v.setViewAttributes();
+		}
+
+		bee.setViewAttributes();
+		// TracedView tvp = flowers.get(4);
+
+		for (final TracedView tvp : flowers) {
+			point_form = tvp.topLeftX - bee.topLeftX;
+			point_to = tvp.topLeftY - bee.topLeftY;
+			Animation animation = new TranslateAnimation(tx, point_form, ty,
+					point_to);
+			tx = point_form;
+			ty = point_to;
+			animation.setDuration(500);
+			animation.setFillAfter(true);
+			animation.setAnimationListener(this);
+			animationList.add(animation);
+		}
+		// bee.startAnimation(animationList.get(currentAnimation));
+
 	}
 
-//	public boolean onTouch(View view, MotionEvent event) {
-//		final int X = (int) event.getRawX();
-//		final int Y = (int) event.getRawY();
-//		switch (event.getAction() & MotionEvent.ACTION_MASK) {
-//		case MotionEvent.ACTION_DOWN:
-//			RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) view
-//					.getLayoutParams();
-//			_xDelta = X - lParams.leftMargin;
-//			_yDelta = Y - lParams.topMargin;
-//			break;
-//		case MotionEvent.ACTION_UP:
-//			break;
-//		case MotionEvent.ACTION_POINTER_DOWN:
-//			break;
-//		case MotionEvent.ACTION_POINTER_UP:
-//			break;
-//		case MotionEvent.ACTION_MOVE:
-//
-//			bee_center_x = X - _xDelta + bee_width / 2;
-//			bee_center_y = Y - _yDelta + bee_height / 2;
-//
-//			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view
-//					.getLayoutParams();
-//			layoutParams.leftMargin = X - _xDelta;
-//			layoutParams.topMargin = Y - _yDelta;
-//			layoutParams.rightMargin = -250;
-//			layoutParams.bottomMargin = -250;
-//			view.setLayoutParams(layoutParams);
-//			bee.setCenterX(X - _xDelta);
-//			bee.setCenterY(Y - _yDelta);
-//			if (flowers.get(3).isInsideBounds(bee.getCenterX(),
-//					bee.getCenterY())) {
-//				Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-//			}
-//			break;
-//		}
-//		_root.invalidate();
-//		return true;
-//	}
+	@Override
+	public void onAnimationEnd(Animation animation) {
+		currentAnimation++;
+		if (currentAnimation < animationList.size())
+			bee.startAnimation(animationList.get(currentAnimation));
+	}
+
+	@Override
+	public void onAnimationRepeat(Animation animation) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onAnimationStart(Animation animation) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
