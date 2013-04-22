@@ -56,6 +56,7 @@ public class MainActivity extends Activity implements AnimationListener {
 		flowers.add(tvv);
 		tvv = (TracedView) findViewById(R.id.point_2);
 		tvv.setNewPart(true);
+		flowers.add(tvv);
 		tvv = (TracedView) findViewById(R.id.point_3);
 		tvv.setNewPart(true);
 		flowers.add(tvv);

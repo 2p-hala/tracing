@@ -62,50 +62,6 @@ public abstract class DragController {
 				} else {
 					pervTracedObject = currentTracedObject;
 					currentTracedObject = tracedViewsList.get(currentIndex);
-					if (currentTracedObject.isNewPart()) {
-						RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) movingObject
-								.getLayoutParams();
-						layoutParams.leftMargin = currentTracedObject.topLeftX;
-						layoutParams.topMargin = currentTracedObject.topLeftY;
-						layoutParams.rightMargin = -250;
-						layoutParams.bottomMargin = -250;
-						movingObject
-								.setLayoutParams(layoutParams);
-						Animation animation = new TranslateAnimation(
-								movingObject.getCenterX(),
-								currentTracedObject.topLeftX
-										- movingObject.getCenterX(),
-								movingObject.getCenterY(),
-								currentTracedObject.topLeftY
-										- movingObject.getCenterY());
-
-						animation.setDuration(500);
-						animation.setFillAfter(true);
-						animation
-								.setAnimationListener(new Animation.AnimationListener() {
-
-									@Override
-									public void onAnimationStart(
-											Animation animation) {
-										// TODO Auto-generated method stub
-
-									}
-
-									@Override
-									public void onAnimationRepeat(
-											Animation animation) {
-										// TODO Auto-generated method stub
-
-									}
-
-									@Override
-									public void onAnimationEnd(
-											Animation animation) {
-									
-									}
-								});
-			//			movingObject.startAnimation(animation);
-					}
 				}
 			}
 			// }
@@ -130,8 +86,45 @@ public abstract class DragController {
 		// if a collision is found but not with the current or next star
 		return (currentTracedObject.isInsideDrawingBounds(x, y) || pervTracedObject
 				.isInsideDrawingBounds(x, y));
-		// && !nextTracedObject.isInsideDrawingBounds(x, y))
-		// return false;
-		// return drawView.checkPath(x, y);
+
+	}
+
+	public RelativeLayout.LayoutParams checknewPart() {
+		if (currentTracedObject.isNewPart()) {
+			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) currentTracedObject
+					.getLayoutParams();
+//			movingObject.setLayoutParams(layoutParams);
+//			// movingObject.setViewAttributes();
+//			Animation animation = new TranslateAnimation(
+//					movingObject.getCenterX(), currentTracedObject.topLeftX
+//							- movingObject.getCenterX(),
+//					movingObject.getCenterY(), currentTracedObject.topLeftY
+//							- movingObject.getCenterY());
+//
+//			animation.setDuration(500);
+//			animation.setFillAfter(true);
+//			animation.setAnimationListener(new Animation.AnimationListener() {
+//
+//				@Override
+//				public void onAnimationStart(Animation animation) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//
+//				@Override
+//				public void onAnimationRepeat(Animation animation) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//
+//				@Override
+//				public void onAnimationEnd(Animation animation) {
+//
+//				}
+//			});
+			// movingObject.startAnimation(animation);
+			return layoutParams;
+		}
+		return null;
 	}
 }

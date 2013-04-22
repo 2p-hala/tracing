@@ -61,19 +61,35 @@ public class MovingObject extends ImageView implements View.OnTouchListener {
 					.getLayoutParams();
 			_xDelta = X - lParams.leftMargin;
 			_yDelta = Y - lParams.topMargin;
-			MainActivity.dragC.drawStart(centerX + width / 4, centerY
-					- height / 3);
+			MainActivity.dragC.drawStart(centerX + width / 4, centerY - height
+					/ 3);
 			break;
 		case MotionEvent.ACTION_UP:
 			MainActivity.dragC.drawEnd();
+			RelativeLayout.LayoutParams layoutParams2 = MainActivity.dragC
+					.checknewPart();
+//if new part move to it
+			if (layoutParams2 != null){
+				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view
+						.getLayoutParams();
+				layoutParams.leftMargin = layoutParams2.leftMargin-width/2;
+				layoutParams.topMargin = layoutParams2.topMargin-height/2;
+				layoutParams.rightMargin = -250;
+				layoutParams.bottomMargin = -250;
+				view.setLayoutParams(layoutParams);
+				_xDelta = X - layoutParams.leftMargin;
+				_yDelta = Y - layoutParams.topMargin;
+				centerX = X - _xDelta + width / 2;
+				centerY = Y - _yDelta + height / 2;
+			}
 			break;
 		case MotionEvent.ACTION_POINTER_DOWN:
 			break;
 		case MotionEvent.ACTION_POINTER_UP:
 			break;
 		case MotionEvent.ACTION_MOVE:
-			if (MainActivity.dragC.checkBoundries(X - _xDelta + width / 2,
-					Y - _yDelta + height / 2)) {
+			if (MainActivity.dragC.checkBoundries(X - _xDelta + width / 2, Y
+					- _yDelta + height / 2)) {
 				centerX = X - _xDelta + width / 2;
 				centerY = Y - _yDelta + height / 2;
 
@@ -97,7 +113,8 @@ public class MovingObject extends ImageView implements View.OnTouchListener {
 		// _root.invalidate();
 		return true;
 	}
-	public void setLocation(float x,float y) {
-		
+
+	public void setLocation(float x, float y) {
+
 	}
 }
