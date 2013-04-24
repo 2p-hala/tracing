@@ -71,11 +71,11 @@ public abstract class DragController {
 	}
 
 	public void drawStart(float x, float y) {
-		drawView.touch_start(x, y);
+		drawView.touch_start(x-20, y+30);
 	}
 
 	public void drawMove(float x, float y) {
-		drawView.touch_move(x, y);
+		drawView.touch_move(x-20, y+30);
 	}
 
 	public void drawEnd() {

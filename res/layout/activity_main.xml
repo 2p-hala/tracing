@@ -2,149 +2,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:adjustViewBounds="true" >
+    android:adjustViewBounds="true"
+    android:background="@drawable/bg" >
 
     <RelativeLayout
-        android:id="@+id/root"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="@drawable/card_1_bg" >
 
-        <CustomObject.DrawView
-            android:id="@+id/imageView1"
-            android:layout_width="316dp"
-            android:layout_height="337dp"
-            android:layout_marginLeft="-5dp"
-            android:layout_marginTop="22dp"
-            android:src="@drawable/letter_2" />
+        <RelativeLayout
+            android:id="@+id/root"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" >
 
-        <CustomObject.TracedView
-            android:id="@+id/point_1"
-            android:layout_width="35dp"
-            android:layout_height="32dp"
-            android:layout_marginLeft="193dp"
-            android:layout_marginTop="42dp"
-            android:src="@drawable/flower" />
+            <CustomObject.DrawView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/l1" />
 
-        <CustomObject.TracedView
-            android:id="@+id/point_3"
-            android:layout_width="31dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="174dp"
-            android:layout_marginTop="95dp"
-            android:src="@drawable/flower" />
+            <include layout="@layout/shen" />
+        </RelativeLayout>
 
-        <CustomObject.TracedView
-            android:id="@+id/point_2"
-            android:layout_width="36dp"
-            android:layout_height="33dp"
-            android:layout_marginLeft="225dp"
-            android:layout_marginTop="91dp"
-            android:src="@drawable/flower" />
+        <ImageView
+            android:id="@+id/animalImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/tree" />
 
-        <CustomObject.TracedView
-            android:id="@+id/s1"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="265dp"
-            android:layout_marginTop="157dp"
-            android:src="@drawable/flower" />
+        <RelativeLayout
+            android:id="@+id/root2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" >
 
-        <CustomObject.TracedView
-            android:id="@+id/s2"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="200dp"
-            android:src="@drawable/flower" />
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/l2" />
 
-        <CustomObject.TracedView
-            android:id="@+id/s3"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="230dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s4"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="210dp"
-            android:layout_marginTop="190dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s5"
-            android:layout_width="32dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="230dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s6"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="140dp"
-            android:layout_marginTop="190dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s7"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="260dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s8"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="300dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s9"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="320dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s10"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="300dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s11"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="260dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.TracedView
-            android:id="@+id/s12"
-            android:layout_width="32dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="220dp"
-            android:src="@drawable/flower" />
-
-        <CustomObject.MovingObject
-            android:id="@+id/bee"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="120dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/bee" />
+            <include layout="@layout/shen" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

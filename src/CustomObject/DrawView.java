@@ -22,7 +22,7 @@ public class DrawView extends ImageView {
 	Paint p = new Paint();
 	HashMap<String, Integer> points;
 	private Paint mPaint;
-	int strokeSize = 30;
+	int strokeSize = 20;
 	private Bitmap imageOriginal;
 	private int font_color = 0xffffffff;
 	int outOfBoundry = 0;

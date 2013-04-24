@@ -32,6 +32,7 @@ public class MainActivity extends Activity implements AnimationListener {
 	int ty = 0;
 	ArrayList<Animation> animationList;
 	int currentAnimation = 0;
+	private MovingObject bee2;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,7 @@ public class MainActivity extends Activity implements AnimationListener {
 		flowers.add((TracedView) findViewById(R.id.s8));
 		flowers.add((TracedView) findViewById(R.id.s9));
 		flowers.add((TracedView) findViewById(R.id.s10));
-		flowers.add((TracedView) findViewById(R.id.s11));
-		flowers.add((TracedView) findViewById(R.id.s12));
+		
 		TracedView tvv = (TracedView) findViewById(R.id.point_1);
 		tvv.setNewPart(true);
 		flowers.add(tvv);
@@ -81,10 +81,44 @@ public class MainActivity extends Activity implements AnimationListener {
 
 		bee.setViewAttributes();
 		// TracedView tvp = flowers.get(4);
+		/////////////////////animation
+		intializeAnimation();
+		
 
-		for (final TracedView tvp : flowers) {
-			point_form = tvp.topLeftX - bee.topLeftX;
-			point_to = tvp.topLeftY - bee.topLeftY;
+	}
+
+	private void intializeAnimation() {
+		View anim = findViewById(R.id.root2);
+		ArrayList<TracedView> flowers2=new ArrayList<TracedView>();
+		flowers2.add((TracedView) anim.findViewById(R.id.s1));
+		flowers2.add((TracedView) anim.findViewById(R.id.s2));
+		flowers2.add((TracedView) anim.findViewById(R.id.s3));
+		flowers2.add((TracedView) anim.findViewById(R.id.s4));
+		flowers2.add((TracedView) anim.findViewById(R.id.s5));
+		flowers2.add((TracedView) anim.findViewById(R.id.s6));
+		flowers2.add((TracedView) anim.findViewById(R.id.s7));
+		flowers2.add((TracedView) anim.findViewById(R.id.s8));
+		flowers2.add((TracedView) anim.findViewById(R.id.s9));
+		flowers2.add((TracedView) anim.findViewById(R.id.s10));
+		
+		TracedView tvv = (TracedView) anim.findViewById(R.id.point_1);
+		tvv.setNewPart(true);
+		flowers2.add(tvv);
+		tvv = (TracedView) anim.findViewById(R.id.point_2);
+		tvv.setNewPart(true);
+		flowers2.add(tvv);
+		tvv = (TracedView) anim.findViewById(R.id.point_3);
+		tvv.setNewPart(true);
+		flowers2.add(tvv);
+		for (TracedView v : flowers2) {
+			v.setViewAttributes();
+		}
+		 bee2 = (MovingObject)  anim.findViewById(R.id.bee);
+		bee2.setViewAttributes();
+		
+		for (final TracedView tvp : flowers2) {
+			point_form = tvp.topLeftX - bee2.topLeftX;
+			point_to = tvp.topLeftY - bee2.topLeftY;
 			Animation animation = new TranslateAnimation(tx, point_form, ty,
 					point_to);
 			tx = point_form;
@@ -94,15 +128,17 @@ public class MainActivity extends Activity implements AnimationListener {
 			animation.setAnimationListener(this);
 			animationList.add(animation);
 		}
-		// bee.startAnimation(animationList.get(currentAnimation));
-
+		bee2.startAnimation(animationList.get(currentAnimation));
 	}
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		currentAnimation++;
 		if (currentAnimation < animationList.size())
-			bee.startAnimation(animationList.get(currentAnimation));
+			bee2.startAnimation(animationList.get(currentAnimation));
+		else{
+			bee2.setVisibility(View.GONE);
+		}
 	}
 
 	@Override

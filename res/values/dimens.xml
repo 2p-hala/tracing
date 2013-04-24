@@ -3,5 +3,11 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="charLayoutWidth">200dp</dimen>
+    <dimen name="charLayoutHight">200dp</dimen>
+    <dimen name="tracedObjectWidth">11dp</dimen>
+    <dimen name="tracedObjectHight">12dp</dimen>
+    <dimen name="movingObjectWidth">20dp</dimen>
+    <dimen name="movingObjectHight">24dp</dimen>
 
 </resources>
